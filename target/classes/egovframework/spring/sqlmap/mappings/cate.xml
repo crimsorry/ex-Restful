@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="Cate">
+
+	<typeAlias alias="cateVO" type="egovframework.rte.rex.cgr.service.CategoryVO" />
+	
+	<resultMap id="cateResult" class="cateVO">
+		<result property="ctgry_id" column="ctgry_id"/>
+		<result property="ctgry_nm" column="ctgry_nm"/>
+		<result property="dc" column="dc"/>
+	</resultMap>
+	
+	<delete id="deleteCategory" parameterClass="cateVO">
+		<![CDATA[
+			DELETE  
+			FROM RTETNCTGRY 
+			WHERE ctgry_id = #ctgry_id#
+		]]>
+	</delete>
+	
+	<insert id="insertCategory" parameterClass="cateVO">
+		<![CDATA[
+			INSERT INTO RTETNCTGRY (ctgry_id, ctgry_nm, dc)  
+			VALUES (#ctgry_id#, #ctgry_nm#, #dc#) 
+		]]>
+	</insert>
+	
+	<select id="selectCategoryList" parameterClass="cateVO" resultMap="cateResult">
+		<![CDATA[
+			SELECT ctgry_id, 
+				   ctgry_nm, 
+				   dc 
+			FROM   RTETNCTGRY 
+		]]>
+	</select>
+	
+	<select id="getCategory" parameterClass="cateVO" resultMap="cateResult">
+		<![CDATA[
+			SELECT ctgry_id, 
+				   ctgry_nm, 
+				   dc 
+			FROM   RTETNCTGRY 
+			WHERE  ctgry_id = #ctgry_id#
+		]]>
+	</select>
+
+</sqlMap>
+
